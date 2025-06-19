@@ -1,0 +1,186 @@
+<!-- V1.html - 用户交互界面 -->
+<!DOCTYPE html>
+<html lang="zh-CN"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box;}
+        body{background-color: #FFF8DC; overflow: hidden; position: relative;}
+        header{position: fixed; top: 0%; width: 100%; height: 12%;background-color: #556B2F;}
+        .navbar{display: flex; justify-content: space-between; margin: 0;padding: 0; box-sizing: border-box;}
+        .logo-img{margin: 0; padding: 15% 30%; height: 70%;}
+        .logo-text{color: #6f4e37; font-family: "隶书", sans-serif; font-size: 1rem; letter-spacing: 2px;}
+        .nav-link{color: #6f4e37; font-weight: 500; padding: 0.5rem 1rem; border-radius: 10%; transition: all 0.3s ease; position: relative;}
+        .nav-link:hover{color: white; box-shadow: 0 0 100px rgba(0, 139, 139, 0.2);}
+        .nav-link::before{content: ""; position: absolute; top: -2px; left: 50%; width: 0; height: 2px; background: #008b8b; transition: width 0.3s ease;}
+        .nav-link:hover::before{white-space: 50%; left: 25%;}
+        .nav-search{display: flex; align-items: center; gap: 1rem; background-color: rgba(red, green, blue, 0.1); padding: 1rem 1rem; border-radius: 10%;}
+        .search-input{border: none; color: white; font-size: 1rem; width: 60%;}
+        .page{display: none; margin: 0%; padding: 20% 20%; font-size: 24px; text-align: center;}
+        .page.active {display: block;}
+        .choice123{display: flex; flex-direction: row; margin: 0; background-color: gainsboro; width: 100%; height: 100%;}
+        .choicepng{margin: 0; width: 90%;}
+        footer{position: fixed; bottom: 0%; width: 100%; height: 8%; background-color: #556B2F; padding: 10px; text-align: center;}
+    </style>
+</head>
+<body>
+    <!-- 页首栏 -->
+    <header>
+        <!-- 导航栏 -->
+        <nav class="navbar">
+            <!-- Logo -->
+            <div class="logo">
+                <img src="Logo.png" alt="Logo" class="logo-img">
+                <h1 class="logo-text">logo-text</h1>
+            </div>
+            <!-- 选项 -->
+            <div class="nav-links">
+                <button class="nav-link" onclick="showPage('homepage')">首页</a>
+                <button class="nav-link" onclick="showPage('history-page')">记录</a>
+                <button class="nav-link" onclick="showPage('more-page')">更多</a>
+            </div>
+            <!-- 搜索栏 -->
+             <div class="nav-search">
+                <input type="text1" placeholder="青铜器" class="search-input">
+                <button class="search-btn" onclick="search-page">搜索</button>
+             </div>
+        </nav>
+    </header>
+    <!-- 开始页 -->
+    <section id="homepage" class="page active">
+        <title>homepage</title>
+        <h1 class="maintite">homepage</h1>
+        <img src="Homepage.png" alt="homepage" class="home-img">
+        <button class="video-page1" onclick="showPage('video-page1')">开始</button>
+    </section>
+    <!-- 动画片段展示-->
+    <section id="video-page1" class="page">
+        <h1>video-page1 </h1>
+        <img src="video1.mp4" alt="video1" class="video1">
+        <button class="choice-page0" onclick="showPage('choice-page0')">跳过</button>
+    </section>
+    <!-- 青铜器型选择 -->
+    <section id="choice-page0" class="page">
+        <h1>choice-page0</h1>
+        <div class="choice123">
+            <div class="choice1">
+                <img src="choice1.png" alt="choice1png" class="choicepng">
+                <button class="choice-btn" onclick="setDirection('1')">器型1</button>
+            </div>
+            <div class="choice2">
+                <img src="choice2.png" alt="choice2png" class="choicepng">
+                <button class="choice-btn" onclick="setDirection('2')">器型2</button>   
+            </div>
+            <div class="choice3">
+                <img src="choice3.png" alt="choice3pnb" class="choicepng">
+                <button class="choice-btn" onclick="setDirection('3')">器型3</button>
+            </div>
+        </div>
+        <div id="noSelectMsg" class="warning"></div>
+    </section>
+    <!-- 铭文文字输入 -->
+    <section id="input-page" class="page">
+        <h1>input-page</h1>
+        <input type="text2" placeholder="50字以内" class="setting-input">
+        <button class="right-input" onclick="saveinput()">确定</button>
+        <button class="btn1" onclick="confirmDirection()">生成</button>
+        <button class="btn2" onclick="showPage('choice-page0')">上一步</button>
+    </section>
+    <!-- 铭文位置选择1 -->
+    <section id="choice-page1" class="page">
+        <h1>choice-page1</h1>
+        <img src="choice11.png" alt="choice11" class="choice11">
+        <button onclick="showPage('video-page2')">下一步</button>
+        <button class="btn2" onclick="backinput()">上一步</button>
+    </section>
+    <!-- 铭文位置选择2 -->
+    <section id="choice-page2" class="page">
+        <h1>choice-page2</h1>
+        <img src="choice21.png" alt="choice21" class="choice21">
+
+        <button onclick="showPage('video-page2')">下一步</button>
+        <button class="btn2" onclick="backinput()">上一步</button>
+    </section>
+    <!-- 铭文位置选择3 -->
+    <section id="choice-page3" class="page">
+        <h1>choice-page3</h1>
+        <img src="choice31.png" alt="choice31" class="choice31">
+
+        <button onclick="showPage('video-page2')">下一步</button>
+        <button class="btn2" onclick="backinput()">上一步</button>
+    </section>
+    <!-- 铸造动画展示 -->
+    <section id="video-page2" class="page">
+        <h1>video-page2</h1>
+        <img src="video2.mp4" alt="video2" class="video2">
+        <button onclick="showPage('output-page')">查看</button>
+    </section>
+    <!-- 生成模型展示 -->
+    <section id="output-page" class="page">
+        <h1>output-page</h1>
+
+        <button onclick="showPage('choice-page0')">再次</button>
+        <button onclick="showPage('history-page')">记录</a>
+        <button onclick="showPage('more-page')">更多</a>
+        <button class="btn2" onclick="backchoice()">上一步</button>
+    </section>
+    <!-- 历史记录界面 -->
+     <section id="history-page" class="page">
+        <h1>history-page</h1>
+        <button onclick="showPage('choice-page0')">生成模型</button>
+     </section>
+    <!-- 拓展页 -->
+     <section id="more-page" class="page">
+        <h1>more-page</h1>
+        <button onclick="showPage('choice-page0')">生成模型</button>
+     </section>
+    <!-- 页尾栏 -->
+    <footer class="footer">
+        <h1>footer</h1>
+        <img src="footer.png" alt="footer" class="footer">
+        <button class="footer-btn" onclick="about">关于我们</button>
+    </footer>
+    <script>
+        let selectedDirection = null;
+        let currentPage = 'homepage';
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            const targetPage=document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                currentPage = pageId;
+                document.getElementById('noSelectMsg').textContent = '';
+            }
+        }
+        function setDirection(direction) {
+            if (direction === '1' || direction === '2' || direction === '3') {
+                selectedDirection = direction;
+                showPage('input-page'); 
+            } else {document.getElementById('noSelectMsg').textContent = '请选择有效的方向！';}
+        }
+        function confirmDirection() {
+            if (selectedDirection) {
+                showPage('choice-page' + selectedDirection); 
+                selectedDirection = null; 
+            } else {alert('请先选择方向！');}
+        }
+        function saveinput(){
+
+        }
+        function backinput(){
+            showPage('input-page')
+        }
+        document.querySelectorAll('#choice-page1,#choice-page2,#choice-page3').forEach(page => {
+            page.querySelector('button').addEventListener('click', () => {
+                showPage('video-page2');
+            });
+        });
+    </script>
+</body> 
+</html>
+<script>
+</script>
